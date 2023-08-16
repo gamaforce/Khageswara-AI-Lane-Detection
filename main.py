@@ -7,7 +7,7 @@ from tensorflow import keras
 import segmentation_models as sm
 
 # Used input
-input_num = 2
+input_num = 1
 
 # Training parameter
 test_size = 0.2
@@ -262,7 +262,7 @@ masks_edge =[]
 
 model = create_model()
 
-model_path = os.path.join("model/model.h5")
+model_path = os.path.join("model/model_1.h5")
 model.load_weights(model_path)
 
 tf.debugging.set_log_device_placement(True)
@@ -280,7 +280,7 @@ cap = cv2.VideoCapture(video_path)
 
 # Create Trackbars
 cv2.namedWindow("Trackbars")
-cv2.createTrackbar("Treshold", "Trackbars", 1, 100, nothing)
+cv2.createTrackbar("Treshold", "Trackbars", 10, 100, nothing)
 cv2.createTrackbar("Lower Limit", "Trackbars", 25, 179, nothing)
 cv2.createTrackbar("Upper Limit", "Trackbars", 87, 179, nothing)
 cv2.createTrackbar("Area Tolerance", "Trackbars", 50000, 90000, nothing)
@@ -301,7 +301,7 @@ while(cap.isOpened()):
         # Predict mask
         pred = model.predict(np.expand_dims(frame, 0))
 
-        range_tresh = cv2.getTrackbarPos("Treshold", "Trackbars") / 1000
+        range_tresh = cv2.getTrackbarPos("Treshold", "Trackbars") / 10000
 
         # Process mask
         mask = pred.squeeze()

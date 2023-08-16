@@ -1,2 +1,2 @@
 # Khageswara-AI-Lane-Detection
-Created by Defit and Teqi
+Image Segmentation for detecting lanes
